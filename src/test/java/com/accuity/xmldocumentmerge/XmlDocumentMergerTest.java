@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TrustedGeneratorTest {
+public class XmlDocumentMergerTest {
 
     @Test
     public void testGenerateTrustedDocumentDocRoot() throws IOException, SAXException, ParserConfigurationException {
@@ -47,7 +47,7 @@ public class TrustedGeneratorTest {
 
         RuleProcessor rp = Mockito.mock(RuleProcessor.class);
 
-        TrustedGenerator trustedGenerator = new TrustedGenerator(rp);
+        XmlDocumentMerger trustedGenerator = new XmlDocumentMerger(rp);
 
         Map<String, Document> sourceDocuments = new HashMap<>();
         sourceDocuments.put("sourceB", db.parse(new ByteArrayInputStream("<country source=\"sourceB\"></country>".getBytes(StandardCharsets.UTF_8))));
@@ -56,7 +56,7 @@ public class TrustedGeneratorTest {
 
         Mockito.when(rp.processRule(Mockito.any(Rule.class), Mockito.any(Document.class), Mockito.anyMap())).thenReturn(db.parse(new ByteArrayInputStream("<country source=\"trusted\"></country>".getBytes(StandardCharsets.UTF_8))));
 
-        Document trusted = trustedGenerator.generateTrustedDocument(rules, sourceDocuments);
+        Document trusted = trustedGenerator.mergeDocuments(rules, sourceDocuments);
 
         Assert.assertEquals("trusted", trusted.getDocumentElement().getAttribute("source"));
 
@@ -73,7 +73,7 @@ public class TrustedGeneratorTest {
     public void testGenerateTrustedDocumentChecksNullDocRoot() throws IOException, SAXException, ParserConfigurationException {
         RuleProcessor rp = Mockito.mock(RuleProcessor.class);
 
-        TrustedGenerator trustedGenerator = new TrustedGenerator(rp);
+        XmlDocumentMerger trustedGenerator = new XmlDocumentMerger(rp);
 
         Rules rules = new Rules();
         rules.setContext("/");
@@ -85,14 +85,14 @@ public class TrustedGeneratorTest {
 
         Mockito.when(rp.processRule(Mockito.any(Rule.class), Mockito.any(Document.class), Mockito.anyMap())).thenReturn(DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
 
-        Document trusted = trustedGenerator.generateTrustedDocument(rules, sourceDocuments);
+        Document trusted = trustedGenerator.mergeDocuments(rules, sourceDocuments);
 
         Assert.assertNull(trusted);
 
     }
 
     /**
-     * Tests that generateTrustedDocument returns Null when RulesProcessor Returns An Empty Document.
+     * Tests that mergeDocuments returns Null when RulesProcessor Returns An Empty Document.
      * For example, this would occur when there are no sources which are trusted > 0
      *
      * @throws ParserConfigurationException
@@ -110,10 +110,10 @@ public class TrustedGeneratorTest {
         Mockito.when(ruleProcessor.processRule(Mockito.any(Rule.class), Mockito.any(Document.class), Mockito.anyMap())).thenReturn(db.newDocument());
 
         // instance
-        TrustedGenerator generator = new TrustedGenerator(ruleProcessor);
+        XmlDocumentMerger generator = new XmlDocumentMerger(ruleProcessor);
 
         // run code
-        Document trustedDocument = generator.generateTrustedDocument(rules, documentMap);
+        Document trustedDocument = generator.mergeDocuments(rules, documentMap);
 
         // asserts
         Assert.assertNull("Generated document should be null", trustedDocument);

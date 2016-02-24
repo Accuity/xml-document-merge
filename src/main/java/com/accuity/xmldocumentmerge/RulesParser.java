@@ -6,6 +6,9 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 
+/**
+ * Parses an inputStream into the Rules model to be passed into the XmlDocumentMerger
+ */
 public class RulesParser {
     Rules parse(InputStream inputStream) {
 
