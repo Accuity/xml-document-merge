@@ -19,6 +19,9 @@ public class RulesParser {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
+        if (rules != null) {
+            rules.getRule().setParentRulesForChildren();
+        }
         return rules;
     }
 }

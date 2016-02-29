@@ -37,5 +37,6 @@ public class RulesParserTest {
         Rules result = rulesParser.parse(new ByteArrayInputStream(fileContent.getBytes(StandardCharsets.UTF_8)));
         Assert.assertEquals("/", result.getContext());
         Assert.assertEquals("rootElement", result.getRule().getContext());
+        Assert.assertNotNull("Sets parent Rules",result.getRule().getRules().get(0).getParentRule());
     }
 }
