@@ -6,8 +6,6 @@ plugins {
     id "maven-publish"
 }
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
 version = '2.0.0-SNAPSHOT'
 group = 'com.accuity'
 
@@ -42,7 +40,11 @@ publishing {
 }
 
 dependencies {
-    compile group: 'xmlunit', name: 'xmlunit', version: '1.6'
+    testCompile group: 'xmlunit', name: 'xmlunit', version: '1.6'
+    testCompile 'com.fasterxml.jackson.core:jackson-core:2.7.+'
+    testCompile 'com.fasterxml.jackson.core:jackson-databind:2.7.+'
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.7.+'
+    testCompile 'org.json:json:20160212'
     testCompile group: 'junit', name: 'junit', version: '4.+'
     testCompile "org.mockito:mockito-all:1.9.5"
 }

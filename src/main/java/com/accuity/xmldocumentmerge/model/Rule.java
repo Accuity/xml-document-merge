@@ -1,5 +1,7 @@
 package com.accuity.xmldocumentmerge.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,12 +31,12 @@ public class Rule {
 
 
     @XmlTransient
-    // @JsonIgnore
+    @JsonIgnore
     private Rule parentRule;
 
 
     @XmlTransient
-    // @JsonIgnore
+    @JsonIgnore
     private String fullContextXPath;
 
     public void setParentRulesForChildren() {
