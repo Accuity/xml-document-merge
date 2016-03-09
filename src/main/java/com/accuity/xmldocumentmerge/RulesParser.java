@@ -10,7 +10,7 @@ import java.io.InputStream;
  * Parses an inputStream into the Rules model to be passed into the XmlDocumentMerger
  */
 public class RulesParser {
-    Rules parse(InputStream inputStream) {
+    public Rules parse(InputStream inputStream) {
 
         Rules rules = null;
         try {
