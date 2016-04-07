@@ -72,7 +72,7 @@ public class RuleProcessor {
                 if (trustedParentNode == null) {
                     // this should only happen when a rule is a child of a stop rule
                     // OR when a subrule has a trusted source which contains data on a node, and that node does not exist in any of the sources in the parent rules
-                    LOG.warning("no parent node found in trusted document for xpath " + rule.getFullContextXPath() + ". skipping rule.");
+                    LOG.info("no parent node found in trusted document for xpath " + rule.getFullContextXPath() + ". skipping rule.");
                 } else {
                     // process sources in order of trustworthyness
                     for (Source source : ruleSources) {
