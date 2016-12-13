@@ -6,8 +6,8 @@ plugins {
     id "maven-publish"
 }
 
-version = '2.0.0-SNAPSHOT'
-group = 'com.accuity'
+group = appGroup
+version = appVersion
 
 repositories {
     mavenCentral()
