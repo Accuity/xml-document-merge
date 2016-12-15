@@ -109,7 +109,7 @@ public class RuleProcessor {
 										if (rule.getField().getIds() != null) {
 											// coalesce match rules
 											newKey = buildKeyForNode(sourceNode, rule.getField().getIds());
-											LOG.info("Key for foreign node is " + newKey);
+											LOG.fine("Key for foreign node is " + newKey);
 
 											if (coalesceMatches.containsKey(newKey)) {
 												LOG.fine("matching key found. should merge instead of coalesce");
