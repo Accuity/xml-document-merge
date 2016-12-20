@@ -76,13 +76,14 @@ public class RuleProcessor {
 				} else {                	
 					//pre-process coalesce trusted document rule
 					Map<String, Node> coalesceMatches = new HashMap<>();
+					NodeList startTrustedNodes = (NodeList) ruleXpath.evaluate(trustedDocument, XPathConstants.NODESET);
 					if (rule.getField() != null && rule.getField().isCoalesce()) {
 						if (rule.getField().getIds() != null) {
 							// coalesce match rules
-							for (int j = 0; j < nl.getLength(); j++) {
-								String key = buildKeyForNode(nl.item(j), rule.getField().getIds());
-								LOG.fine("found node with key: " + key);
-								coalesceMatches.put(key, nl.item(j));
+							for (int j = 0; j < startTrustedNodes.getLength(); j++) {
+								String key = buildKeyForNode(startTrustedNodes.item(j), rule.getField().getIds());
+								LOG.info("found node with key: " + key);
+								coalesceMatches.put(key, startTrustedNodes.item(j));
 							}
 						}
 					}
