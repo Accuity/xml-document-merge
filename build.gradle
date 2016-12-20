@@ -3,7 +3,6 @@ plugins {
     id "idea"
     id "jacoco"
     id "java"
-    id "maven-publish"
 }
 
 group = appGroup
@@ -11,32 +10,6 @@ version = appVersion
 
 repositories {
     mavenCentral()
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-    repositories {
-        maven {
-            name "snapshots"
-            credentials {
-                username nexusUser
-                password nexusPassword
-            }
-            url nexusSnapshotUri
-        }
-        maven {
-            name "releases"
-            credentials {
-                username nexusUser
-                password nexusPassword
-            }
-            url nexusReleaseUri
-        }
-    }
 }
 
 dependencies {
